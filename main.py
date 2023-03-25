@@ -1,9 +1,11 @@
 from PIL import Image
 import custom_story as cs
 import divider as dd
+from termcolor import colored
 
 def main():
-    print("Welcome to the StoryBoarder\n")
+    title = colored("Welcome to the StoryBoarder\n", "red")
+    print(title)
     print("A program that will write a script according to your needs and will show a storyboard for that script")
     print("Menu:\n")
     print("1. Generate a script and the storyboard")
