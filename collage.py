@@ -5,13 +5,13 @@ def collage(num_images):
     input_images = []
 
     for i in range(num_images):
-        input_images.append(f"storyboardimage{num_images + 1}.jpg")
+        input_images.append(f"storyboardimage{i + 1}.jpg")
 
     # Open the input images and resize them to the same size (optional)
     images = [Image.open(file).resize((400, 400)) for file in input_images]
 
     # Create a new image with the desired size and mode (RGB or RGBA)
-    collage_width = 3 * images[0].width
+    collage_width = num_images * images[0].width
     collage_height = images[0].height
     collage_mode = "RGB"
     collage_image = Image.new(collage_mode, (collage_width, collage_height))
