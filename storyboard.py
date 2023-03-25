@@ -5,7 +5,7 @@ from PIL import Image
 from io import BytesIO
 
 def storyboard_generator(text, model, i):
-    API_KEY = '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'
+    API_KEY = "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"
 
     # The type of images the user wanted to be generated, such as realistic or anime
     if (model == 'realistic'):
@@ -30,9 +30,15 @@ def storyboard_generator(text, model, i):
     )
 
     # Retrieve the URL of the generated image from the API response
-    image_url = response.json()["data"][0]["url"]
+    try:
+        # print(response.json())
+        image_url = response.json()["data"][0]["url"]
+        # Download the image from the URL 
+        response = requests.get(image_url)
+        image = Image.open(BytesIO(response.content))
+        image.save(f"storyboardimage{i + 1}.jpg")
+    except KeyError:
+        print("Error: data not found in API response.")
+        image_url = None
 
-    # Download the image from the URL 
-    response = requests.get(image_url)
-    image = Image.open(BytesIO(response.content))
-    image.save(f"storyboardimage{i + 1}.jpg")
+# storyboard_generator("Pat is a fat guy", "realistic", 1)
