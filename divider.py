@@ -28,6 +28,8 @@ def divide_script(script, num_parts, model):
         
         # Add the current part to the list of parts
         parts.append(part)
+
+    # print("Parts", parts)
     
     for i in range(len(parts)):
         sb.storyboard_generator(parts[i], model, i)
