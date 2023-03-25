@@ -1,5 +1,5 @@
 import openai
-openai.api_key = "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"
+openai.api_key = "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"
 
 from PIL import Image
 import requests
