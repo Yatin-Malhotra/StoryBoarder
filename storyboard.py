@@ -4,11 +4,8 @@ import base64
 from PIL import Image
 from io import BytesIO
 
-def storyboard_generator(model, i):
+def storyboard_generator(text, model, i):
     API_KEY = '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'
-
-    # The portion of the movie scrip that should be converted to the image
-    text = "Pat is a fat guy who wants to be slim"
 
     # The type of images the user wanted to be generated, such as realistic or anime
     if (model == 'realistic'):
