@@ -1,6 +1,8 @@
 import re
+import storyboard as sb
+import collage as cg
 
-def divide_script(script, num_parts):
+def divide_script(script, num_parts, model):
     # Split the script into sentences
     sentences = re.findall('[A-Z][^\.!?]*[\.!?]', script)
     
@@ -27,10 +29,7 @@ def divide_script(script, num_parts):
         # Add the current part to the list of parts
         parts.append(part)
     
-    return parts
-
-
-script = "This is a long script that needs to be divided into shorter strings so that each string can be depicted in one picture. Each divided string should make sense and be easy to understand. This can be accomplished by dividing the script into sentences and distributing those sentences across the divided strings."
-num_parts = 3
-parts = divide_script(script, num_parts)
-print(parts)
+    for i in range(len(parts)):
+        sb.storyboard_generator(parts[i], model, i)
+    
+    cg.collage(len(parts))
