@@ -1,1 +1,37 @@
-
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Input Fields</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <h1>StoryBoarder</h1>
+    <form id="input-form" action="#" method="post">
+      <label for="style">Style:</label>
+      <select id="style" name="style" required>
+        <option value="REAL">Realistic</option>
+        <option value="CART">Cartoon</option>
+      </select>
+      
+      <label for="storyboard">Number of storyboards</label>
+      <input type="number" id="storyboard" name="storyboard" placeholder="Enter number of storyboards" required>  
+      
+      
+      <label for="genre">Genre:</label>
+      <input type="text" id="genre" name="genre" placeholder="Enter genre of the movie" required>
+      
+      <label for="descp">Desciption:</label>
+      <input type="descp" id="descp" name="descp" placeholder="Enter a small desciption of your movie" required>
+      
+      <input type="submit" value="Submit" id="submit-button">
+    </form>
+    
+    <img id="myImage" src="{{url}}">
+    <p id="output">{{message}}</p>
+    
+  </body>
+  
+  
+  </html>
+  
