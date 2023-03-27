@@ -1,9 +1,11 @@
+import audio as ad
+import movie as mv
+
 def read_script(script):
     lines = script.splitlines()
-    return lines
+    length = len(lines)
 
-'''
-script = "This is line 1.\nThis is line 2.\nThis is line 3."
-lines = read_script(script)
-print(lines)
-'''
+    for i in range(length):
+        ad.generate_movie_clip(lines[i], i)
+    
+    mv.generate_movie(length)
