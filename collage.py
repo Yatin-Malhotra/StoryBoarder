@@ -57,5 +57,5 @@ def collage(num_images):
                     collage.paste(images[index], (x, y))
 
         # Save the final collage image to a file
-        collage.save("collage.jpg")
+        collage.save("collage.png")
 
