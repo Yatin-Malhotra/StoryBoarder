@@ -2,6 +2,7 @@ from PIL import Image
 import custom_story as cs
 import divider as dd
 from termcolor import colored
+import splitlines as sl
 
 def main():
     title = colored("Welcome to the StoryBoarder\n", "red")
@@ -22,14 +23,18 @@ def main():
         script = cs.Custom_Script(description, genre)
         print("Get ready for your awesome script: \n")
         print(script)
+        print("working on the storyboards")
         dd.divide_script(script, num_storyboards, model)
-        image = Image.open("collage.jpg")
+        print("generated the storyboards")
+        image = Image.open("collage.png")
         image.show()
+        sl.read_script(script, model)
     elif (user_input == 2):
         script = input("Enter your script: ")
         dd.divide_script(script, num_storyboards, model)
-        image = Image.open("collage.jpg")
+        image = Image.open("collage.png")
         image.show()
+        sl.read_script(script, model)
     elif (user_input == 3):
         print("Displaying a thumbs up (our presentors are)")
     elif (user_input == 4):
