@@ -12,7 +12,7 @@ def generate_movie_clip(text, counter):
     tts.save(output_audio)
 
     # Set the input image file name
-    input_image = f"storyboardimage{counter + 1}.jpg"
+    input_image = f"image{counter + 1}.jpg"
 
     # Set the output video file name
     output_video = f"output_video{counter + 1}.mp4"
