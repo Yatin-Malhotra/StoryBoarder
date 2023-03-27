@@ -1,8 +1,12 @@
 import re
 import storyboard as sb
 import collage as cg
+import audio as ad
+import movie as mv
 
 def divide_script(script, num_parts, model):
+
+    print("Inside divide script function")
     # Split the script into sentences
     sentences = re.findall('[A-Z][^\.!?]*[\.!?]', script)
     
@@ -32,6 +36,8 @@ def divide_script(script, num_parts, model):
     # print("Parts", parts)
     
     for i in range(len(parts)):
+        # print("Giving storyboard the input")
         sb.storyboard_generator(parts[i], model, i)
     
     cg.collage(len(parts))
+
