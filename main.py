@@ -2,7 +2,7 @@ from PIL import Image
 import custom_story as cs
 import divider as dd
 from termcolor import colored
-import splitlines as sl
+import split_lines as sl
 
 def main():
     title = colored("Welcome to the StoryBoarder\n", "red")
