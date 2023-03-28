@@ -51,3 +51,8 @@ form {
     padding: 20px;
     text-align: left;
   }
+
+  div {
+    width: 75%; 
+    margin: auto;
+  }
