@@ -10,8 +10,8 @@
     <form id="input-form" action="#" method="post">
       <label for="style">Style:</label>
       <select id="style" name="style" required>
-        <option value="REAL">Realistic</option>
-        <option value="CART">Cartoon</option>
+        <option value="realistic">Realistic</option>
+        <option value="cartoon">Cartoon</option>
       </select>
       
       <label for="storyboard">Number of storyboards</label>
@@ -27,8 +27,13 @@
       <input type="submit" value="Submit" id="submit-button">
     </form>
     
-    <img id="myImage" src="{{url}}">
-    <p id="output">{{message}}</p>
+    <div>
+      <img id="myImage" src="{{image_src}}">
+      <pre>{{message}}</pre>
+    </div>
+    
+    
+    
     
   </body>
   
