@@ -1,8 +1,10 @@
 from PIL import Image
+import os
 
 def collage(num_images):
 
     image_size = (400, 400)
+    directory = "./static"
     
     if (num_images % 2 == 0):
         num_images_per_row = num_images // 2
@@ -30,7 +32,7 @@ def collage(num_images):
                     collage.paste(images[index], (x, y))
 
         # Save the final collage image to a file
-        collage.save("collage.png")
+        collage.save(os.path.join(directory, "collage.png"))
     else:
         num_images_per_row = (num_images // 2) + 1
         num_images_per_col = num_images // 2
@@ -57,5 +59,4 @@ def collage(num_images):
                     collage.paste(images[index], (x, y))
 
         # Save the final collage image to a file
-        collage.save("collage.png")
-
+        collage.save(os.path.join(directory, "collage.png"))
