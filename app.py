@@ -1,46 +1,62 @@
-from flask import Flask, render_template, request
-from custom_story import Custom_Script
-from divider import divide_script
+from PIL import Image
+import os
 
-app = Flask(__name__)
+def collage(num_images):
 
-@app.route('/', methods = ['POST', 'GET'])
-def home():
-    if request.method == "POST":
-        style = request.form["style"]
-        storyboard = int(request.form["storyboard"])
-        genre = request.form["genre"]
-        descp = request.form["descp"]
+    image_size = (400, 400)
+    directory = "./static"
+    
+    if (num_images % 2 == 0):
+        num_images_per_row = num_images // 2
+        num_images_per_col = num_images // 2
 
-        script = Custom_Script(descp, genre)
-        divide_script(script, storyboard, style)
+        input_images = []
 
-        return render_template("index.html", message = script, url = "../collage.jpg")
+        # Open the input images
+        for i in range(num_images):
+            input_images.append(f"storyboardimage{i + 1}.jpg")
+
+        # Open the input images and resize them to the same size (optional)
+        images = [Image.open(file).resize((400, 400)) for file in input_images]
+
+        # Create a new image for the collage
+        collage_size = (image_size[0] * num_images_per_row, image_size[1] * num_images_per_col)
+        collage = Image.new("RGB", collage_size)
+
+        for i in range(num_images_per_row):
+            for j in range(num_images_per_col):
+                index = i + j * num_images_per_row
+                if index < len(images):
+                    x = i * image_size[0]
+                    y = j * image_size[1]
+                    collage.paste(images[index], (x, y))
+
+        # Save the final collage image to a file
+        collage.save(os.path.join(directory, "collage.png"))
     else:
-        return render_template("index.html")
+        num_images_per_row = (num_images // 2) + 1
+        num_images_per_col = num_images // 2
 
-@app.route('/index', methods=['POST', 'GET'])
-def process_input():
-    if request.method == "POST":
-        style = request.form["style"]
-        storyboard = int(request.form["storyboard"])
-        genre = request.form["genre"]
-        descp = request.form["descp"]
+        input_images = []
 
-        script = Custom_Script(descp, genre)
-        divide_script(script, storyboard, style)
+        # Open the input images
+        for i in range(num_images):
+            input_images.append(f"storyboardimage{i + 1}.jpg")
 
-        return render_template("index.html", message = script, url = "collage.jpg")
-    else:
-        return render_template("index.html")
+        # Open the input images and resize them to the same size (optional)
+        images = [Image.open(file).resize((400, 400)) for file in input_images]
 
+        # Create a new image for the collage
+        collage_size = (image_size[0] * num_images_per_row, image_size[1] * num_images_per_col)
+        collage = Image.new("RGB", collage_size)
 
+        for i in range(num_images_per_row):
+            for j in range(num_images_per_col):
+                index = i + j * num_images_per_row
+                if index < len(images):
+                    x = i * image_size[0]
+                    y = j * image_size[1]
+                    collage.paste(images[index], (x, y))
 
-
-
-
-
-
-
-if __name__ == "__main__":
-    app.run(debug=True, host='0.0.0.0', port=81)
+        # Save the final collage image to a file
+        collage.save(os.path.join(directory, "collage.png"))
