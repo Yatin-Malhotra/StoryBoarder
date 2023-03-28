@@ -17,7 +17,7 @@ def generate_movie(num_parts):
     final_clip.fps = 24
 
     # Set the output video file name
-    output_video = "trailer.mp4"
+    output_video = "static/videos/trailer.mp4"
 
     # Write the final clip to a video file
     final_clip.write_videofile(output_video, codec='libx264', audio_codec='aac')
