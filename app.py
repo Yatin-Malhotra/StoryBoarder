@@ -1,62 +1,44 @@
-from PIL import Image
-import os
+from flask import Flask, render_template, request, url_for
+from custom_story import Custom_Script
+from divider import divide_script
 
-def collage(num_images):
 
-    image_size = (400, 400)
-    directory = "./static"
-    
-    if (num_images % 2 == 0):
-        num_images_per_row = num_images // 2
-        num_images_per_col = num_images // 2
+app = Flask(__name__)
 
-        input_images = []
+@app.route('/', methods = ['POST', 'GET'])
+def home():
+    if request.method == "POST":
+        style = request.form["style"]
+        storyboard = int(request.form["storyboard"])
+        genre = request.form["genre"]
+        descp = request.form["descp"]
 
-        # Open the input images
-        for i in range(num_images):
-            input_images.append(f"storyboardimage{i + 1}.jpg")
+        
 
-        # Open the input images and resize them to the same size (optional)
-        images = [Image.open(file).resize((400, 400)) for file in input_images]
+        script = Custom_Script(descp, genre)
 
-        # Create a new image for the collage
-        collage_size = (image_size[0] * num_images_per_row, image_size[1] * num_images_per_col)
-        collage = Image.new("RGB", collage_size)
+        divide_script(script, storyboard, style)
 
-        for i in range(num_images_per_row):
-            for j in range(num_images_per_col):
-                index = i + j * num_images_per_row
-                if index < len(images):
-                    x = i * image_size[0]
-                    y = j * image_size[1]
-                    collage.paste(images[index], (x, y))
+        image_src = url_for('static', filename='collage.png')
+        
+        video_path = 'static'
+        video_file = 'my_video.mp4'
+        full_path = video_path + video_file
 
-        # Save the final collage image to a file
-        collage.save(os.path.join(directory, "collage.png"))
+        return render_template("index.html", message = script, image_src = image_src, vide_url = full_path)
     else:
-        num_images_per_row = (num_images // 2) + 1
-        num_images_per_col = num_images // 2
+        return render_template("index.html")
 
-        input_images = []
 
-        # Open the input images
-        for i in range(num_images):
-            input_images.append(f"storyboardimage{i + 1}.jpg")
 
-        # Open the input images and resize them to the same size (optional)
-        images = [Image.open(file).resize((400, 400)) for file in input_images]
 
-        # Create a new image for the collage
-        collage_size = (image_size[0] * num_images_per_row, image_size[1] * num_images_per_col)
-        collage = Image.new("RGB", collage_size)
 
-        for i in range(num_images_per_row):
-            for j in range(num_images_per_col):
-                index = i + j * num_images_per_row
-                if index < len(images):
-                    x = i * image_size[0]
-                    y = j * image_size[1]
-                    collage.paste(images[index], (x, y))
 
-        # Save the final collage image to a file
-        collage.save(os.path.join(directory, "collage.png"))
+
+
+
+
+
+
+if __name__ == "__main__":
+    app.run(debug=True, host='0.0.0.0', port=81)
